@@ -887,7 +887,7 @@
             <p class="section-subtitle">Ready to create something that works for your business?</p>
 
             <div class="contact-links">
-                <a href="mailto:moisesmaciasm@gmail.com" class="contact-link" data-cfasync="false">Email</a>
+                <a href="#" class="contact-link" id="emailButton">Email</a>
                 <a href="https://instagram.com/moisesmacias.hub" target="_blank" class="contact-link">Instagram</a>
                 <a href="https://linkedin.com/in/moisesmacias-hub" target="_blank" class="contact-link">LinkedIn</a>
             </div>
@@ -1023,6 +1023,17 @@
         // Hero section should be visible immediately
         document.querySelector('.hero').style.opacity = '1';
         document.querySelector('.hero').style.transform = 'translateY(0)';
+
+        // Copy email to clipboard
+        document.getElementById('emailButton').addEventListener('click', function(e) {
+        e.preventDefault();
+        const email = 'moisesmaciasm@gmail.com';
+        navigator.clipboard.writeText(email).then(function() {
+        alert('Email copied to clipboard: ' + email);
+        }).catch(function() {
+        prompt('Copy this email:', email);
+        });
+        });
     </script>
 
 </body>
