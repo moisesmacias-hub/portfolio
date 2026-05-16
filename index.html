@@ -181,7 +181,13 @@
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            gap: 2.5rem;
+        }
+
+        .portfolio-item-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
         .portfolio-item {
@@ -191,11 +197,12 @@
             aspect-ratio: 16/9;
             background: #E5E7EB;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .portfolio-item:hover {
             transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
 
         .portfolio-item img {
@@ -209,58 +216,42 @@
             transform: scale(1.05);
         }
 
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.9) 0%, rgba(30, 58, 138, 0.9) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            padding: 2rem;
-            text-align: center;
-            flex-direction: column;
+        /* Portfolio Info - Always visible below */
+        .portfolio-info {
+            text-align: left;
         }
 
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-
-        .portfolio-overlay h3 {
-            color: var(--color-white);
-            font-size: 1.25rem;
+        .portfolio-info h3 {
+            font-size: 1.125rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            color: var(--color-secondary);
+            margin-bottom: 0.25rem;
         }
 
-        .portfolio-overlay p {
-            color: rgba(255, 255, 255, 0.9);
+        .portfolio-info p {
             font-size: 0.875rem;
+            color: var(--color-text-light);
+            line-height: 1.5;
         }
 
-        /* VIDEO ITEMS */
+        /* VIDEO ITEMS - Play button positioned lower */
         .portfolio-item.video::after {
             content: '▶';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            font-size: 2.5rem;
             color: var(--color-white);
-            opacity: 0.9;
+            opacity: 0.95;
             pointer-events: none;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
             transition: all 0.3s ease;
             z-index: 2;
         }
 
         .portfolio-item.video:hover::after {
             opacity: 1;
-            transform: translate(-50%, -50%) scale(1.1);
+            transform: scale(1.15);
         }
 
         /* VIDEO MODAL */
@@ -315,6 +306,56 @@
             color: var(--color-primary);
         }
 
+        /* IMAGE MODAL */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        .image-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .image-modal img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--color-white);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+            z-index: 10000;
+        }
+
+        .image-modal-close:hover {
+            color: var(--color-primary);
+        }
+
         /* ABOUT SECTION */
         .about {
             background: var(--color-white);
@@ -331,13 +372,24 @@
             width: 100%;
             aspect-ratio: 1;
             border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Placeholder gradient if no image */
+        .about-image.placeholder {
             background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 8rem;
             color: var(--color-white);
-            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
         }
 
         .about-text h2 {
@@ -580,17 +632,19 @@
                 gap: 1rem;
             }
 
-            .video-modal {
+            .video-modal, .image-modal {
                 padding: 1rem;
             }
 
-            .video-modal-close {
+            .video-modal-close, .image-modal-close {
                 top: -2.5rem;
                 font-size: 1.5rem;
             }
 
             .portfolio-item.video::after {
-                font-size: 3rem;
+                font-size: 2rem;
+                bottom: 1rem;
+                right: 1rem;
             }
         }
     </style>
@@ -616,112 +670,112 @@
 
             <div class="portfolio-grid">
                 <!-- Video 1: Showreel -->
-                <div class="portfolio-item video" data-video-id="8AWqPpxKdP4">
-                    <img src="https://img.youtube.com/vi/8AWqPpxKdP4/maxresdefault.jpg" alt="Showreel — Video & Motion Graphics">
-                    <div class="portfolio-overlay">
-                        <div>
-                            <h3>Showreel — Video & Motion Graphics</h3>
-                            <p>Featured reel across events and brand campaigns</p>
-                        </div>
+                <div class="portfolio-item-wrapper">
+                    <div class="portfolio-item video" data-video-id="8AWqPpxKdP4">
+                        <img src="https://img.youtube.com/vi/8AWqPpxKdP4/maxresdefault.jpg" alt="Showreel — Video & Motion Graphics">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Showreel — Video & Motion Graphics</h3>
+                        <p>Featured reel across events and brand campaigns</p>
                     </div>
                 </div>
 
                 <!-- Video 2: OCESA -->
-                <div class="portfolio-item video" data-video-id="cpoa9iAyX1g">
-                    <img src="https://img.youtube.com/vi/cpoa9iAyX1g/maxresdefault.jpg" alt="Event Screen Graphics — OCESA">
-                    <div class="portfolio-overlay">
-                        <div>
-                            <h3>Event Screen Graphics — OCESA</h3>
-                            <p>Openers, artist intros & sponsor reels for large-format displays</p>
-                        </div>
+                <div class="portfolio-item-wrapper">
+                    <div class="portfolio-item video" data-video-id="cpoa9iAyX1g">
+                        <img src="https://img.youtube.com/vi/cpoa9iAyX1g/maxresdefault.jpg" alt="Event Screen Graphics — OCESA">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Event Screen Graphics — OCESA</h3>
+                        <p>Openers, artist intros & sponsor reels for large-format displays</p>
                     </div>
                 </div>
 
                 <!-- Video 3: Telecable/Pegasica -->
-                <div class="portfolio-item video" data-video-id="m1BRGXrst5I">
-                    <img src="https://img.youtube.com/vi/m1BRGXrst5I/maxresdefault.jpg" alt="Advertising Production Reel">
-                    <div class="portfolio-overlay">
-                        <div>
-                            <h3>Advertising Production Reel</h3>
-                            <p>Telecable · Pegasica — TV & YouTube spots</p>
-                        </div>
+                <div class="portfolio-item-wrapper">
+                    <div class="portfolio-item video" data-video-id="m1BRGXrst5I">
+                        <img src="https://img.youtube.com/vi/m1BRGXrst5I/maxresdefault.jpg" alt="Advertising Production Reel">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Advertising Production Reel</h3>
+                        <p>Telecable · Pegasica — TV & YouTube spots</p>
                     </div>
                 </div>
 
                 <!-- Video 4: Motion Graphics -->
-                <div class="portfolio-item video" data-video-id="HCI25Mxsy40">
-                    <img src="https://img.youtube.com/vi/HCI25Mxsy40/maxresdefault.jpg" alt="Motion Graphics Showreel">
-                    <div class="portfolio-overlay">
-                        <div>
-                            <h3>Motion Graphics Showreel</h3>
-                            <p>Animation, titles, transitions & infographics</p>
-                        </div>
+                <div class="portfolio-item-wrapper">
+                    <div class="portfolio-item video" data-video-id="HCI25Mxsy40">
+                        <img src="https://img.youtube.com/vi/HCI25Mxsy40/maxresdefault.jpg" alt="Motion Graphics Showreel">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Motion Graphics Showreel</h3>
+                        <p>Animation, titles, transitions & infographics</p>
                     </div>
                 </div>
 
                 <!-- Video 5: Instagram Reels -->
-                <div class="portfolio-item video" data-video-id="Di85VF6fpgQ">
-                    <img src="https://img.youtube.com/vi/Di85VF6fpgQ/maxresdefault.jpg" alt="Instagram Reels & Stories">
-                    <div class="portfolio-overlay">
-                        <div>
-                            <h3>Instagram Reels & Stories</h3>
-                            <p>Harcourts Cooper & Co — Social media content</p>
-                        </div>
+                <div class="portfolio-item-wrapper">
+                    <div class="portfolio-item video" data-video-id="Di85VF6fpgQ">
+                        <img src="https://img.youtube.com/vi/Di85VF6fpgQ/maxresdefault.jpg" alt="Instagram Reels & Stories">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Instagram Reels & Stories</h3>
+                        <p>Harcourts Cooper & Co — Social media content</p>
                     </div>
                 </div>
 
                 <!-- Video 6: Basketball -->
-                <div class="portfolio-item video" data-video-id="LHCdsGi4aCo">
-                    <img src="https://img.youtube.com/vi/LHCdsGi4aCo/maxresdefault.jpg" alt="Brand Sponsorship Video">
-                    <div class="portfolio-overlay">
-                        <div>
-                            <h3>Brand Sponsorship Video — Basketball</h3>
-                            <p>Harcourts Cooper & Co — Event video</p>
-                        </div>
+                <div class="portfolio-item-wrapper">
+                    <div class="portfolio-item video" data-video-id="LHCdsGi4aCo">
+                        <img src="https://img.youtube.com/vi/LHCdsGi4aCo/maxresdefault.jpg" alt="Brand Sponsorship Video">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Brand Sponsorship Video — Basketball</h3>
+                        <p>Harcourts Cooper & Co — Event video</p>
                     </div>
                 </div>
 
                 <!-- Video 7: TOPIC App -->
-                <div class="portfolio-item video" data-video-id="hlcakwyvgyg">
-                    <img src="https://img.youtube.com/vi/hlcakwyvgyg/maxresdefault.jpg" alt="TOPIC App Launch">
-                    <div class="portfolio-overlay">
-                        <div>
-                            <h3>TOPIC App Launch</h3>
-                            <p>Explainer & promotional video</p>
-                        </div>
+                <div class="portfolio-item-wrapper">
+                    <div class="portfolio-item video" data-video-id="hlcakwyvgyg">
+                        <img src="https://img.youtube.com/vi/hlcakwyvgyg/maxresdefault.jpg" alt="TOPIC App Launch">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>TOPIC App Launch</h3>
+                        <p>Explainer & promotional video</p>
                     </div>
                 </div>
 
                 <!-- Image 1: Harcourts -->
-                <div class="portfolio-item">
-                    <img src="Harcourts.png" alt="Print & Digital Design">
-                    <div class="portfolio-overlay">
-                        <div>
-                            <h3>Print & Digital Design</h3>
-                            <p>Harcourts Cooper & Co — Marketing materials</p>
-                        </div>
+                <div class="portfolio-item-wrapper">
+                    <div class="portfolio-item image" data-image-src="Harcourts.png">
+                        <img src="Harcourts.png" alt="Print & Digital Design">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Print & Digital Design</h3>
+                        <p>Harcourts Cooper & Co — Marketing materials</p>
                     </div>
                 </div>
 
                 <!-- Image 2: Macorer -->
-                <div class="portfolio-item">
-                    <img src="Macorer.jpeg" alt="Brand Identity & Stationery">
-                    <div class="portfolio-overlay">
-                        <div>
-                            <h3>Brand Identity & Stationery</h3>
-                            <p>Macorer — Logo & full stationery system</p>
-                        </div>
+                <div class="portfolio-item-wrapper">
+                    <div class="portfolio-item image" data-image-src="Macorer.jpeg">
+                        <img src="Macorer.jpeg" alt="Brand Identity & Stationery">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Brand Identity & Stationery</h3>
+                        <p>Macorer — Logo & full stationery system</p>
                     </div>
                 </div>
 
                 <!-- Image 3: Tacolicious -->
-                <div class="portfolio-item">
-                    <img src="Tacolicious.png" alt="Packaging & Brand Identity">
-                    <div class="portfolio-overlay">
-                        <div>
-                            <h3>Packaging & Brand Identity</h3>
-                            <p>Tacolicious — Frozen food brand</p>
-                        </div>
+                <div class="portfolio-item-wrapper">
+                    <div class="portfolio-item image" data-image-src="Tacolicious.png">
+                        <img src="Tacolicious.png" alt="Packaging & Brand Identity">
+                    </div>
+                    <div class="portfolio-info">
+                        <h3>Packaging & Brand Identity</h3>
+                        <p>Tacolicious — Frozen food brand</p>
                     </div>
                 </div>
             </div>
@@ -731,8 +785,16 @@
     <!-- VIDEO MODAL -->
     <div class="video-modal" id="videoModal">
         <div class="video-modal-content">
-            <button class="video-modal-close" id="closeModal">✕</button>
+            <button class="video-modal-close" id="closeVideoModal">✕</button>
             <iframe id="videoFrame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- IMAGE MODAL -->
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-content">
+            <button class="image-modal-close" id="closeImageModal">✕</button>
+            <img id="imageFrame" src="" alt="Portfolio Image">
         </div>
     </div>
 
@@ -740,9 +802,16 @@
     <section class="about">
         <div class="container">
             <div class="about-content">
-                <div class="about-image">
+                <!-- Option 1: Use your own photo - replace "your-photo.jpg" with your actual photo filename -->
+                <!-- <div class="about-image">
+                    <img src="your-photo.jpg" alt="Moises Macias">
+                </div> -->
+
+                <!-- Option 2: Placeholder gradient (current) -->
+                <div class="about-image placeholder">
                     📸
                 </div>
+
                 <div class="about-text">
                     <h2>About</h2>
                     <p>I help brands find their voice and show up with clarity. My work blends creative execution with real-world marketing thinking — shaped by 10+ years across Mexico and New Zealand, from live events to digital campaigns.</p>
@@ -822,8 +891,8 @@
             <p class="section-subtitle">Ready to create something that works for your business?</p>
 
             <div class="contact-links">
-                <a href="/cdn-cgi/l/email-protection#55383a3c2630263834363c342638153238343c397b363a38" class="contact-link"><span class="__cf_email__" data-cfemail="0c6163657f697f616d6f656d7f614c6b616d6560226f6361">[email&#160;protected]</span></a>
-                <a href="https://instagram.com/moisesmacias.hub" target="_blank" class="contact-link">@moisesmacias.hub</a>
+                <a href="/cdn-cgi/l/email-protection#274a484e5442544a46444e46544a67404a464e4b0944484a" class="contact-link">Email</a>
+                <a href="https://instagram.com/moisesmacias.hub" target="_blank" class="contact-link">Instagram</a>
                 <a href="https://linkedin.com/in/moisesmacias-hub" target="_blank" class="contact-link">LinkedIn</a>
             </div>
 
@@ -840,8 +909,14 @@
         // Video Modal Functionality
         const videoModal = document.getElementById('videoModal');
         const videoFrame = document.getElementById('videoFrame');
-        const closeModal = document.getElementById('closeModal');
+        const closeVideoModal = document.getElementById('closeVideoModal');
         const videoItems = document.querySelectorAll('.portfolio-item.video');
+
+        // Image Modal Functionality
+        const imageModal = document.getElementById('imageModal');
+        const imageFrame = document.getElementById('imageFrame');
+        const closeImageModal = document.getElementById('closeImageModal');
+        const imageItems = document.querySelectorAll('.portfolio-item.image');
 
         // Open video modal
         videoItems.forEach(item => {
@@ -853,33 +928,62 @@
             });
         });
 
+        // Open image modal
+        imageItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imageSrc = this.getAttribute('data-image-src');
+                imageFrame.src = imageSrc;
+                imageModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
         // Close video modal
-        function closeVideoModal() {
+        function closeVideo() {
             videoModal.classList.remove('active');
             videoFrame.src = '';
             document.body.style.overflow = 'auto';
         }
 
-        closeModal.addEventListener('click', closeVideoModal);
+        // Close image modal
+        function closeImage() {
+            imageModal.classList.remove('active');
+            imageFrame.src = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        closeVideoModal.addEventListener('click', closeVideo);
+        closeImageModal.addEventListener('click', closeImage);
 
         // Close on background click
         videoModal.addEventListener('click', function(e) {
             if (e.target === videoModal) {
-                closeVideoModal();
+                closeVideo();
+            }
+        });
+
+        imageModal.addEventListener('click', function(e) {
+            if (e.target === imageModal) {
+                closeImage();
             }
         });
 
         // Close on ESC key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
-                closeVideoModal();
+            if (e.key === 'Escape') {
+                if (videoModal.classList.contains('active')) {
+                    closeVideo();
+                }
+                if (imageModal.classList.contains('active')) {
+                    closeImage();
+                }
             }
         });
 
         // Pause video when tab is not visible
         document.addEventListener('visibilitychange', function() {
             if (document.hidden && videoModal.classList.contains('active')) {
-                closeVideoModal();
+                closeVideo();
             }
         });
 
