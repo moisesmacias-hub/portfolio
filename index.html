@@ -1,686 +1,929 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Moises Macias — Portfolio</title>
-<style>
-:root{
-  --pb:#4A6FA5;--pb-dark:#2C4A72;--pb-deep:#1a2f50;
-  --pb-light:#C8DAEA;--pb-xlight:#EBF2FA;
-  --ink:#111318;--mid:#4a4a4a;--muted:#888;
-  --border:#dde3ec;--bg:#F2F5FA;--white:#fff;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moises Macias | Creative for Brands in Motion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* HEADER */
-header{background:var(--pb-deep);padding:0 4rem;display:flex;justify-content:space-between;align-items:center;height:66px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(26,47,80,0.45);}
-.logo{font-size:1rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--white);}
-.logo span{color:var(--pb-light);}
-.social-icons{display:flex;gap:0.6rem;align-items:center;}
-.social-icons a{width:34px;height:34px;border:1px solid rgba(255,255,255,0.18);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all 0.2s;box-shadow:0 2px 8px rgba(0,0,0,0.2);}
-.social-icons a:hover{background:var(--pb);border-color:var(--pb);transform:translateY(-1px);box-shadow:0 4px 12px rgba(74,111,165,0.5);}
-.social-icons svg{width:15px;height:15px;fill:rgba(255,255,255,0.8);}
+        :root {
+            --color-primary: #FF6B35;
+            --color-secondary: #1E3A8A;
+            --color-accent: #FFC107;
+            --color-white: #FFFFFF;
+            --color-text: #1F2937;
+            --color-text-light: #6B7280;
+            --color-bg: #FAFAFA;
+        }
 
-/* NAV */
-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 4rem;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px rgba(74,111,165,0.08);}
-.nav-links{display:flex;}
-nav a{text-decoration:none;font-size:0.72rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);padding:1.1rem 1.1rem;border-bottom:2px solid transparent;transition:color 0.2s,border-color 0.2s;}
-nav a.active,nav a:hover{color:var(--pb);border-bottom-color:var(--pb);}
-.nav-badge{font-size:0.62rem;background:var(--pb-xlight);color:var(--pb);padding:0.25rem 0.7rem;border-radius:2px;letter-spacing:0.4px;white-space:nowrap;}
+        html {
+            scroll-behavior: smooth;
+        }
 
-/* SECTIONS */
-section{display:none;}
-section.active{display:block;}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--color-text);
+            background: var(--color-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-/* HERO */
-.hero{background:var(--pb-deep);padding:5rem 4rem 4.5rem;position:relative;overflow:hidden;}
-.geo-block{position:absolute;right:0;top:0;width:45%;height:100%;background:linear-gradient(135deg,var(--pb) 0%,var(--pb-dark) 100%);clip-path:polygon(22% 0,100% 0,100% 100%,0% 100%);opacity:0.4;}
-.geo-circle{position:absolute;right:120px;bottom:-60px;width:240px;height:240px;border:2px solid rgba(200,218,234,0.2);border-radius:50%;box-shadow:inset 0 0 40px rgba(74,111,165,0.15);}
-.geo-line1{position:absolute;right:280px;top:40px;width:100px;height:2px;background:var(--pb-light);opacity:0.25;}
-.geo-line2{position:absolute;right:260px;top:52px;width:60px;height:2px;background:var(--pb-light);opacity:0.15;}
-.geo-dot{position:absolute;right:200px;top:82px;width:8px;height:8px;border-radius:50%;background:var(--pb-light);opacity:0.3;}
-.hero-content{position:relative;z-index:2;max-width:580px;}
-.hero-eyebrow{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--pb-light);margin-bottom:0.6rem;opacity:0.8;}
-.hero h1{font-size:3.4rem;font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.05;margin-bottom:0.6rem;}
-.hero h1 span{color:var(--pb-light);}
-.hero-tagline{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:1.05rem;color:var(--pb-light);opacity:0.9;margin-bottom:1.4rem;letter-spacing:0.3px;}
-.hero p{font-size:0.92rem;color:rgba(255,255,255,0.55);line-height:1.8;max-width:460px;margin-bottom:2rem;}
-.hero-actions{display:flex;gap:0.75rem;flex-wrap:wrap;}
-.btn-solid{display:inline-block;text-decoration:none;font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--white);background:var(--pb);border:1px solid var(--pb);padding:0.6rem 1.3rem;border-radius:2px;transition:all 0.2s;box-shadow:0 4px 14px rgba(74,111,165,0.35);}
-.btn-solid:hover{background:var(--pb-dark);border-color:var(--pb-dark);}
-.btn-outline{display:inline-block;text-decoration:none;font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--white);border:1px solid rgba(255,255,255,0.25);padding:0.6rem 1.3rem;border-radius:2px;transition:all 0.2s;}
-.btn-outline:hover{background:var(--pb);border-color:var(--pb);}
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F0 100%);
+            overflow: hidden;
+        }
 
-/* HERO MINI */
-.hero-mini{background:var(--pb-deep);padding:3rem 4rem 2.5rem;position:relative;overflow:hidden;}
-.hero-mini .hero-content h1{font-size:2.4rem;color:var(--white);}
-.hero-mini .hero-eyebrow{color:var(--pb-light);}
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
 
-/* SKILLS STRIP */
-.skills-strip{background:var(--pb);padding:1rem 4rem;display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;box-shadow:0 4px 16px rgba(74,111,165,0.25);}
-.skills-strip span{font-size:0.65rem;letter-spacing:0.8px;text-transform:uppercase;color:rgba(255,255,255,0.85);padding:0.2rem 0.75rem;border:1px solid rgba(255,255,255,0.2);border-radius:2px;}
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 193, 7, 0.08) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite reverse;
+        }
 
-/* SECTION BANNER */
-.section-banner{background:var(--pb-deep);border-radius:4px;padding:1.8rem 2.2rem;margin-bottom:2.5rem;position:relative;overflow:hidden;box-shadow:0 6px 24px rgba(26,47,80,0.22);}
-.sb-geo{position:absolute;right:0;top:0;bottom:0;width:30%;background:var(--pb);opacity:0.25;clip-path:polygon(20% 0,100% 0,100% 100%,0 100%);}
-.sb-line{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--pb-light);}
-.section-banner h2{font-size:1.5rem;font-weight:800;color:var(--white);position:relative;z-index:2;}
-.section-banner p{font-size:0.75rem;color:rgba(255,255,255,0.45);margin-top:0.2rem;letter-spacing:0.5px;text-transform:uppercase;position:relative;z-index:2;}
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
 
-/* ABOUT */
-.about-wrapper{padding:3.5rem 4rem;}
-.about-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:2rem;align-items:start;}
-.about-card{background:var(--white);border-radius:4px;padding:2rem 2.2rem;border:1px solid var(--border);box-shadow:0 4px 20px rgba(74,111,165,0.08);}
-.about-card h3{font-size:0.62rem;text-transform:uppercase;letter-spacing:1.8px;color:var(--pb);margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
-.about-card p{font-size:0.88rem;color:var(--mid);line-height:1.8;margin-bottom:0.85rem;}
-.skills-cloud{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.2rem;}
-.s-tag{font-size:0.68rem;background:var(--pb-xlight);color:var(--pb);padding:0.28rem 0.75rem;border-radius:2px;}
-.info-stack{display:flex;flex-direction:column;gap:1rem;}
-.info-card{background:var(--white);border-radius:4px;padding:1.2rem 1.4rem;border:1px solid var(--border);border-left:3px solid var(--pb);box-shadow:0 2px 12px rgba(74,111,165,0.07);}
-.info-card h4{font-size:0.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--pb);margin-bottom:0.4rem;}
-.info-card p,.info-card a{font-size:0.84rem;color:var(--mid);display:block;text-decoration:none;line-height:1.6;}
-.info-card a:hover{color:var(--pb);}
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
 
-/* PORTFOLIO */
-.portfolio-wrapper{padding:3.5rem 4rem;}
-.filter-bar{display:flex;gap:0.5rem;margin-bottom:2.5rem;flex-wrap:wrap;}
-.f-btn{font-size:0.68rem;letter-spacing:0.8px;text-transform:uppercase;padding:0.45rem 1.1rem;border:1px solid var(--border);background:var(--white);border-radius:2px;cursor:pointer;color:var(--muted);transition:all 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
-.f-btn.active,.f-btn:hover{background:var(--pb);color:var(--white);border-color:var(--pb);box-shadow:0 4px 12px rgba(74,111,165,0.3);}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
+        .hero-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
 
-/* VIDEO FEATURE */
-.video-feature-card{background:var(--white);border-radius:4px;border:1px solid var(--border);overflow:hidden;margin-bottom:2rem;box-shadow:0 6px 24px rgba(74,111,165,0.12);}
-.video-embed{position:relative;padding-bottom:56.25%;height:0;}
-.video-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
-.video-feature-info{padding:1.1rem 1.4rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,var(--pb-xlight) 0%,var(--white) 100%);}
-.video-feature-info h3{font-size:0.88rem;font-weight:600;}
-.video-feature-info p{font-size:0.75rem;color:var(--muted);margin-top:0.1rem;}
-.vf-badge{font-size:0.62rem;letter-spacing:0.8px;text-transform:uppercase;background:var(--pb);color:var(--white);padding:0.28rem 0.75rem;border-radius:2px;white-space:nowrap;margin-left:1rem;}
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
 
-/* MASONRY */
-.masonry{columns:3;column-gap:1.2rem;}
-.m-card{break-inside:avoid;background:var(--white);border-radius:4px;border:1px solid var(--border);overflow:hidden;margin-bottom:1.2rem;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 2px 12px rgba(74,111,165,0.07);}
-.m-card:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(74,111,165,0.18);}
-.m-card.clickable{cursor:pointer;}
-.m-thumb{width:100%;position:relative;display:flex;align-items:center;justify-content:center;}
-.m-thumb.tall{height:230px;}
-.m-thumb.med{height:175px;}
-.m-thumb.short{height:135px;}
-.m-thumb.dk1{background:linear-gradient(135deg,#0d1520 0%,#1a2f50 100%);}
-.m-thumb.dk2{background:linear-gradient(135deg,#111827 0%,#0f2035 100%);}
-.m-thumb.dk3{background:linear-gradient(135deg,#0a1628 0%,#1e3a5f 100%);}
-.m-thumb.lt1{background:linear-gradient(135deg,#eef2f8 0%,#dce7f3 100%);}
-.m-thumb.lt2{background:linear-gradient(135deg,#f5f3ef 0%,#ede8e0 100%);}
-.m-thumb.lt3{background:linear-gradient(135deg,#f0f4fb 0%,#e0eaf8 100%);}
-.m-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-.geo-thumb-line{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--pb);opacity:0.6;}
-.geo-thumb-corner{position:absolute;top:10px;left:10px;width:22px;height:22px;border-top:2px solid rgba(255,255,255,0.2);border-left:2px solid rgba(255,255,255,0.2);}
-.geo-thumb-corner.dark{border-color:rgba(74,111,165,0.3);}
-.play-ring{width:46px;height:46px;border:1.5px solid rgba(255,255,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(255,255,255,0.05);}
-.play-ring::after{content:'';width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid rgba(255,255,255,0.75);margin-left:4px;}
-.m-type{position:absolute;top:10px;right:10px;font-size:0.58rem;letter-spacing:0.8px;text-transform:uppercase;padding:0.18rem 0.5rem;border-radius:2px;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);}
-.m-type.on-lt{background:var(--pb-xlight);color:var(--pb);}
-.m-body{padding:0.85rem 1rem 1rem;}
-.m-body h3{font-size:0.82rem;font-weight:600;color:var(--ink);margin-bottom:0.2rem;}
-.m-body p{font-size:0.73rem;color:var(--muted);line-height:1.5;}
-.m-client{font-size:0.66rem;color:var(--pb);margin-top:0.4rem;}
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 3vw, 1.5rem);
+            color: var(--color-text-light);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
 
-/* GRAPHIC DESIGN GRID */
-.graphic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
-.g-card{background:var(--white);border-radius:4px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 2px 12px rgba(74,111,165,0.07);}
-.g-card:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(74,111,165,0.18);}
-.g-card img{width:100%;height:220px;object-fit:cover;display:block;}
-.g-card-body{padding:0.85rem 1rem 1rem;}
-.g-card-body h3{font-size:0.82rem;font-weight:600;color:var(--ink);margin-bottom:0.2rem;}
-.g-card-body p{font-size:0.73rem;color:var(--muted);line-height:1.5;}
-.g-card-body .g-client{font-size:0.66rem;color:var(--pb);margin-top:0.4rem;}
+        .hero-location {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
 
-/* LIGHTBOX */
-.lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,20,40,0.92);z-index:1000;align-items:center;justify-content:center;padding:2rem;}
-.lightbox.active{display:flex;}
-.lightbox-inner{background:var(--white);border-radius:4px;max-width:860px;width:100%;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
-.lightbox-inner img{width:100%;max-height:520px;object-fit:contain;display:block;background:#f0f0f0;}
-.lightbox-info{padding:1.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);}
-.lightbox-info h3{font-size:0.95rem;font-weight:600;color:var(--ink);}
-.lightbox-info p{font-size:0.78rem;color:var(--muted);margin-top:0.2rem;}
-.lightbox-close{background:none;border:none;cursor:pointer;font-size:1.4rem;color:var(--muted);padding:0.2rem 0.5rem;transition:color 0.2s;}
-.lightbox-close:hover{color:var(--ink);}
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--color-primary);
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            animation: fadeInUp 0.8s ease-out 0.8s backwards;
+        }
 
-/* EXPERIENCE */
-.exp-wrapper{padding:3.5rem 4rem;}
-.exp-timeline{position:relative;padding-left:2rem;border-left:2px solid var(--pb-light);}
-.exp-item{position:relative;margin-bottom:2.2rem;padding-left:1.8rem;}
-.exp-item::before{content:'';position:absolute;left:-2.4rem;top:8px;width:10px;height:10px;border-radius:50%;background:var(--pb);border:2px solid var(--white);box-shadow:0 0 0 3px var(--pb-light);}
-.exp-card{background:var(--white);border-radius:4px;border:1px solid var(--border);overflow:hidden;box-shadow:0 3px 16px rgba(74,111,165,0.08);transition:box-shadow 0.2s;}
-.exp-card:hover{box-shadow:0 6px 28px rgba(74,111,165,0.15);}
-.exp-card-header{background:linear-gradient(90deg,var(--pb-deep) 0%,var(--pb-dark) 100%);padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;position:relative;overflow:hidden;}
-.exp-card-header::after{content:'';position:absolute;right:0;top:0;bottom:0;width:50px;background:rgba(255,255,255,0.04);clip-path:polygon(30% 0,100% 0,100% 100%,0 100%);}
-.exp-card-header h3{font-size:0.9rem;font-weight:700;color:var(--white);}
-.exp-card-header .company{font-size:0.72rem;color:var(--pb-light);margin-top:0.15rem;opacity:0.85;}
-.exp-dates{font-size:0.65rem;color:rgba(255,255,255,0.4);letter-spacing:0.4px;white-space:nowrap;flex-shrink:0;padding-top:0.15rem;}
-.exp-card-body{padding:1.2rem 1.5rem;}
-.exp-card-body p{font-size:0.83rem;color:var(--mid);line-height:1.75;margin-bottom:0.8rem;}
-.exp-card-body ul{list-style:none;}
-.exp-card-body ul li{font-size:0.8rem;color:var(--mid);padding:0.25rem 0 0.25rem 1rem;border-left:2px solid var(--pb-light);margin-bottom:0.35rem;line-height:1.55;}
-.exp-card-body ul li strong{color:var(--ink);font-weight:600;}
+        .cta-button:hover {
+            background: #E55A2B;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
 
-/* CONTACT */
-.contact-wrapper{padding:3.5rem 4rem;}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
-.c-card{background:var(--white);border-radius:4px;padding:1.75rem;border:1px solid var(--border);box-shadow:0 3px 16px rgba(74,111,165,0.08);}
-.c-card h3{font-size:0.62rem;text-transform:uppercase;letter-spacing:1.8px;color:var(--pb);margin-bottom:1.2rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);}
-.c-card a,.c-card p{display:block;font-size:0.88rem;color:var(--mid);text-decoration:none;margin-bottom:0.6rem;line-height:1.6;}
-.c-card a:hover{color:var(--pb);}
-.avail{display:inline-block;background:var(--pb-xlight);color:var(--pb);font-size:0.7rem;letter-spacing:0.5px;padding:0.3rem 0.85rem;border-radius:2px;margin-top:0.5rem;}
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* RESPONSIVE */
-@media(max-width:1024px){
-  .masonry{columns:2;}
-  .graphic-grid{grid-template-columns:repeat(2,1fr);}
-  .about-grid{grid-template-columns:1fr;}
-  .contact-grid{grid-template-columns:1fr;}
-}
-@media(max-width:768px){
-  header{padding:0 1.5rem;}
-  nav{padding:0 1.5rem;flex-wrap:wrap;}
-  .nav-badge{display:none;}
-  nav a{padding:0.9rem 0.7rem;font-size:0.65rem;}
-  .hero{padding:3rem 1.5rem;}
-  .hero h1{font-size:2.2rem;}
-  .hero-mini{padding:2rem 1.5rem;}
-  .hero-mini .hero-content h1{font-size:1.8rem;}
-  .geo-block{opacity:0.2;}
-  .geo-circle{display:none;}
-  .skills-strip{padding:0.75rem 1.5rem;}
-  .about-wrapper,.portfolio-wrapper,.exp-wrapper,.contact-wrapper{padding:2rem 1.5rem;}
-  .section-banner{padding:1.4rem 1.5rem;}
-  .masonry{columns:1;}
-  .graphic-grid{grid-template-columns:1fr;}
-  .exp-timeline{padding-left:1rem;}
-  .exp-item{padding-left:1.2rem;}
-  .exp-item::before{left:-1.45rem;}
-  .exp-card-header{flex-direction:column;gap:0.4rem;}
-  .video-feature-info{flex-direction:column;align-items:flex-start;gap:0.5rem;}
-  .hero-actions{flex-direction:column;align-items:flex-start;}
-  .lightbox{padding:1rem;}
-  .lightbox-inner img{max-height:300px;}
-}
-@media(max-width:480px){
-  header{height:56px;}
-  .hero h1{font-size:1.8rem;}
-  .hero-tagline{font-size:0.9rem;}
-}
-</style>
+        /* SECTION COMMON STYLES */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-secondary);
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-light);
+            margin-bottom: 4rem;
+        }
+
+        /* PORTFOLIO SECTION */
+        .portfolio {
+            background: var(--color-bg);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            aspect-ratio: 16/9;
+            background: #E5E7EB;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.9) 0%, rgba(30, 58, 138, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 2rem;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay h3 {
+            color: var(--color-white);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-overlay p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.875rem;
+        }
+
+        /* VIDEO ITEMS */
+        .portfolio-item.video::after {
+            content: '▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: var(--color-white);
+            opacity: 0.9;
+            pointer-events: none;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .portfolio-item.video:hover::after {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* VIDEO MODAL */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-modal iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--color-white);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+            z-index: 10000;
+        }
+
+        .video-modal-close:hover {
+            color: var(--color-primary);
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            background: var(--color-white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            color: var(--color-white);
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .about-text h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+
+        .about-cta {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.875rem 2rem;
+            background: var(--color-secondary);
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .about-cta:hover {
+            background: #1E40AF;
+            transform: translateY(-2px);
+        }
+
+        /* EXPERIENCE SECTION */
+        .experience {
+            background: var(--color-bg);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0.5rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--color-white);
+            border: 3px solid var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+        }
+
+        .timeline-item:nth-child(even)::before {
+            border-color: var(--color-secondary);
+            box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-item .role {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item p {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        /* SKILLS SECTION */
+        .skills {
+            background: var(--color-white);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .skill-card {
+            padding: 2rem;
+            border-left: 4px solid var(--color-primary);
+            background: var(--color-bg);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:nth-child(2) {
+            border-left-color: var(--color-secondary);
+        }
+
+        .skill-card:nth-child(3) {
+            border-left-color: var(--color-accent);
+        }
+
+        .skill-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card p {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        /* CONTACT SECTION */
+        .contact {
+            background: var(--color-secondary);
+            color: var(--color-white);
+            text-align: center;
+        }
+
+        .contact .section-title {
+            color: var(--color-white);
+        }
+
+        .contact .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .contact-link {
+            color: var(--color-white);
+            text-decoration: none;
+            font-size: 1.125rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--color-accent);
+        }
+
+        .contact-cta {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--color-primary);
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-cta:hover {
+            background: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0F172A;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.875rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-image {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+
+            .timeline-item::before {
+                left: -2.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .video-modal {
+                padding: 1rem;
+            }
+
+            .video-modal-close {
+                top: -2.5rem;
+                font-size: 1.5rem;
+            }
+
+            .portfolio-item.video::after {
+                font-size: 3rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="logo">Moises <span>Macias</span></div>
-  <div class="social-icons">
-    <a href="https://www.linkedin.com/in/moisesmacias-hub" target="_blank" title="LinkedIn">
-      <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-    </a>
-    <a href="https://www.instagram.com/moisesmacias.hub" target="_blank" title="Instagram">
-      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-    </a>
-  </div>
-</header>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Creative Studio</div>
+            <h1>Moises Macias</h1>
+            <p class="hero-subtitle">Creative for brands in motion</p>
+            <p class="hero-location">Helping businesses show up clearly and communicate better · New Zealand</p>
+            <a href="#portfolio" class="cta-button">View Work</a>
+        </div>
+    </section>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-links">
-    <a href="#" class="active" onclick="showSection('about',this);return false;">About</a>
-    <a href="#" onclick="showSection('portfolio',this);return false;">Portfolio</a>
-    <a href="#" onclick="showSection('experience',this);return false;">Experience</a>
-    <a href="#" onclick="showSection('contact',this);return false;">Contact</a>
-  </div>
-  <span class="nav-badge">NZ Permanent Resident · Open to Relocate</span>
-</nav>
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Work</h2>
+            <p class="section-subtitle">Brand, content, and motion for businesses that want to stand out.</p>
 
-<!-- ══ ABOUT ══ -->
-<section id="about" class="active">
-  <div class="hero">
-    <div class="geo-block"></div><div class="geo-circle"></div>
-    <div class="geo-line1"></div><div class="geo-line2"></div><div class="geo-dot"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Marketing · Communications · Audiovisual Production</p>
-      <h1>Moises<br><span>Macias</span></h1>
-      <p class="hero-tagline">Crafting the experience behind the brand.</p>
-      <p>Creative professional with 10+ years of international experience across brand strategy, audiovisual production, event operations, and content creation.</p>
-      <div class="hero-actions">
-        <a href="#" class="btn-solid" onclick="showSection('portfolio',document.querySelectorAll('nav a')[1]);return false;">View Portfolio</a>
-        <a href="#" class="btn-outline" onclick="showSection('contact',document.querySelectorAll('nav a')[3]);return false;">Get in Touch</a>
-      </div>
-    </div>
-  </div>
-  <div class="skills-strip">
-    <span>Premiere Pro</span><span>After Effects</span><span>Photoshop</span>
-    <span>Illustrator</span><span>Canva</span><span>CapCut</span>
-    <span>YouTube Ads</span><span>Google Ads</span><span>TV & Radio</span>
-    <span>Event Operations</span><span>Brand Strategy</span><span>Bilingual ES/EN</span>
-  </div>
-  <div class="about-wrapper">
-    <div class="section-banner">
-      <div class="sb-geo"></div><div class="sb-line"></div>
-      <h2>About me</h2>
-      <p>Creative · Strategic · Multi-disciplinary</p>
-    </div>
-    <div class="about-grid">
-      <div class="about-card">
-        <h3>Background</h3>
-        <p>My career spans television and radio production, large-scale live event operations, full promotional campaign design, and hands-on digital content creation — a rare combination of strategic thinking and technical execution across both traditional and digital media.</p>
-        <p>From producing broadcast commercials and supporting large-scale concert operations in Mexico — including full campaign management across TV, radio, print, digital, and point-of-sale — to creating content and building brand presence at the community level in New Zealand, I bring a versatile mix of creative strategy and hands-on execution.</p>
-        <p>Based in New Zealand and open to opportunities nationwide — bringing an international perspective and a track record of delivering across both creative and operational environments.</p>
-        <div class="skills-cloud">
-          <span class="s-tag">Adobe Premiere Pro</span><span class="s-tag">After Effects</span>
-          <span class="s-tag">Photoshop</span><span class="s-tag">Illustrator</span>
-          <span class="s-tag">Canva</span><span class="s-tag">CapCut</span>
-          <span class="s-tag">Lightroom</span><span class="s-tag">YouTube Ads</span>
-          <span class="s-tag">Google Ads</span><span class="s-tag">TV & Radio production</span>
-          <span class="s-tag">Script writing</span><span class="s-tag">Event operations</span>
-          <span class="s-tag">Brand strategy</span><span class="s-tag">Traditional media</span>
-          <span class="s-tag">Social media content</span><span class="s-tag">Bilingual ES / EN</span>
-        </div>
-      </div>
-      <div class="info-stack">
-        <div class="info-card"><h4>Location</h4><p>South Island, New Zealand</p><p>Open to opportunities nationwide, with flexibility to relocate as needed.</p></div>
-        <div class="info-card"><h4>Languages</h4><p>Spanish — native</p><p>English — professional working level</p></div>
-        <div class="info-card"><h4>Education</h4><p>Digital Marketing & E-commerce Diploma, 2025</p><p>Bachelor's in Communication Sciences, 2006–2009</p><p>Event Organisation — Brandhome, 2009</p></div>
-        <div class="info-card"><h4>Connect</h4>
-          <a href="https://www.linkedin.com/in/moisesmacias-hub" target="_blank">LinkedIn</a>
-          <a href="https://www.instagram.com/moisesmacias.hub" target="_blank">Instagram @moisesmaciasm.hub</a>
-          <a href="https://www.youtube.com/watch?v=8AWqPpxKdP4" target="_blank">Video Reel — YouTube</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="portfolio-grid">
+                <!-- Video 1: Showreel -->
+                <div class="portfolio-item video" data-video-id="8AWqPpxKdP4">
+                    <img src="https://img.youtube.com/vi/8AWqPpxKdP4/maxresdefault.jpg" alt="Showreel — Video & Motion Graphics">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <h3>Showreel — Video & Motion Graphics</h3>
+                            <p>Featured reel across events and brand campaigns</p>
+                        </div>
+                    </div>
+                </div>
 
-<!-- ══ PORTFOLIO ══ -->
-<section id="portfolio">
-  <div class="hero-mini">
-    <div class="geo-block"></div><div class="geo-circle"></div><div class="geo-line1"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Selected work</p>
-      <h1>Portfolio</h1>
-    </div>
-  </div>
-  <div class="portfolio-wrapper">
-    <div class="filter-bar">
-      <button class="f-btn active" onclick="showTab('all',this)">All work</button>
-      <button class="f-btn" onclick="showTab('audiovisual',this)">Audiovisual</button>
-      <button class="f-btn" onclick="showTab('graphic',this)">Graphic design</button>
-    </div>
+                <!-- Video 2: OCESA -->
+                <div class="portfolio-item video" data-video-id="cpoa9iAyX1g">
+                    <img src="https://img.youtube.com/vi/cpoa9iAyX1g/maxresdefault.jpg" alt="Event Screen Graphics — OCESA">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <h3>Event Screen Graphics — OCESA</h3>
+                            <p>Openers, artist intros & sponsor reels for large-format displays</p>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- ALL -->
-    <div class="tab-content active" id="tab-all">
-      <!-- Showreel -->
-      <div class="video-feature-card">
-        <div class="video-embed"><iframe src="https://www.youtube.com/embed/8AWqPpxKdP4?enablejsapi=1" allowfullscreen></iframe></div>
-        <div class="video-feature-info">
-          <div><h3>Showreel — Video & Motion Graphics</h3><p>Video production, editing, and motion graphics across events and brand campaigns</p></div>
-          <span class="vf-badge">Featured reel</span>
+                <!-- Video 3: Telecable/Pegasica -->
+                <div class="portfolio-item video" data-video-id="m1BRGXrst5I">
+                    <img src="https://img.youtube.com/vi/m1BRGXrst5I/maxresdefault.jpg" alt="Advertising Production Reel">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <h3>Advertising Production Reel</h3>
+                            <p>Telecable · Pegasica — TV & YouTube spots</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 4: Motion Graphics -->
+                <div class="portfolio-item video" data-video-id="HCI25Mxsy40">
+                    <img src="https://img.youtube.com/vi/HCI25Mxsy40/maxresdefault.jpg" alt="Motion Graphics Showreel">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <h3>Motion Graphics Showreel</h3>
+                            <p>Animation, titles, transitions & infographics</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 5: Instagram Reels -->
+                <div class="portfolio-item video" data-video-id="Di85VF6fpgQ">
+                    <img src="https://img.youtube.com/vi/Di85VF6fpgQ/maxresdefault.jpg" alt="Instagram Reels & Stories">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <h3>Instagram Reels & Stories</h3>
+                            <p>Harcourts Cooper & Co — Social media content</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 6: Basketball -->
+                <div class="portfolio-item video" data-video-id="LHCdsGi4aCo">
+                    <img src="https://img.youtube.com/vi/LHCdsGi4aCo/maxresdefault.jpg" alt="Brand Sponsorship Video">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <h3>Brand Sponsorship Video — Basketball</h3>
+                            <p>Harcourts Cooper & Co — Event video</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 7: TOPIC App -->
+                <div class="portfolio-item video" data-video-id="hlcakwyvgyg">
+                    <img src="https://img.youtube.com/vi/hlcakwyvgyg/maxresdefault.jpg" alt="TOPIC App Launch">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <h3>TOPIC App Launch</h3>
+                            <p>Explainer & promotional video</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image 1: Harcourts -->
+                <div class="portfolio-item">
+                    <img src="Harcourts.png" alt="Print & Digital Design">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <h3>Print & Digital Design</h3>
+                            <p>Harcourts Cooper & Co — Marketing materials</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image 2: Macorer -->
+                <div class="portfolio-item">
+                    <img src="Macorer.jpeg" alt="Brand Identity & Stationery">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <h3>Brand Identity & Stationery</h3>
+                            <p>Macorer — Logo & full stationery system</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image 3: Tacolicious -->
+                <div class="portfolio-item">
+                    <img src="Tacolicious.png" alt="Packaging & Brand Identity">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <h3>Packaging & Brand Identity</h3>
+                            <p>Tacolicious — Frozen food brand</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="masonry">
-        <!-- VIDEOS -->
-        <div class="m-card" data-cat="video">
-          <div style="position:relative;width:100%;height:230px;overflow:hidden;background:#0d1520;">
-            <iframe src="https://www.youtube.com/embed/cpoa9iAyX1g?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>Event Screen Graphics — Openers, Artist Intros & Sponsor Reels</h3><p>Animated screen content for live events — event openers, artist intros, and sponsor graphics for large-format stage displays</p><p class="m-client">OCESA</p></div>
+    </section>
+
+    <!-- VIDEO MODAL -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" id="closeModal">✕</button>
+            <iframe id="videoFrame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <div class="m-card" data-cat="video">
-          <div style="position:relative;width:100%;height:175px;overflow:hidden;background:#111827;">
-            <iframe src="https://www.youtube.com/embed/m1BRGXrst5I?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>Advertising Production Reel — TV & YouTube Spots</h3><p>Commercial advertising spots produced for TV and YouTube — direction, shooting, talent management, motion graphics, and full post-production</p><p class="m-client">Telecable · Pegasica</p></div>
-        </div>
-        <div class="m-card" data-cat="video">
-          <div style="position:relative;width:100%;height:230px;overflow:hidden;background:#0a1628;">
-            <iframe src="https://www.youtube.com/embed/HCI25Mxsy40?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>Motion Graphics Showreel — Animation, Titles, Transitions & Infographics</h3><p>2D animation, logo animation, title sequences, transitions, and infographics across advertising, events, and social media projects</p><p class="m-client">Various clients</p></div>
-        </div>
-        <div class="m-card" data-cat="video">
-          <div style="position:relative;width:100%;height:175px;overflow:hidden;background:#111827;">
-            <iframe src="https://www.youtube.com/embed/Di85VF6fpgQ?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>Instagram Reels & Stories — Creative, Production & Motion Graphics</h3><p>Social media video content — creative concept, production, editing, animation, and motion graphics for mobile-first audiences</p><p class="m-client">Harcourts Cooper & Co</p></div>
-        </div>
-        <div class="m-card" data-cat="video">
-          <div style="position:relative;width:100%;height:175px;overflow:hidden;background:#0d1520;">
-            <iframe src="https://www.youtube.com/embed/LHCdsGi4aCo?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>Brand Sponsorship Video — Basketball Event</h3><p>Fast-paced event video capturing the energy of basketball while highlighting brand sponsorship presence</p><p class="m-client">Harcourts Cooper & Co</p></div>
-        </div>
-        <div class="m-card" data-cat="video">
-          <div style="position:relative;width:100%;height:175px;overflow:hidden;background:#0a1628;">
-            <iframe src="https://www.youtube.com/embed/hlcakwyvgyg?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>TOPIC App Launch — Explainer & Promotional Video</h3><p>Explainer and promotional launch video combining motion graphics, original footage, and brand content to communicate app features</p><p class="m-client">TOPIC App</p></div>
-        </div>
-        <!-- GRAPHIC DESIGN — click to graphic tab -->
-        <div class="m-card clickable" onclick="showTab('graphic',document.querySelectorAll('.f-btn')[2])">
-          <div class="m-thumb med" style="overflow:hidden;height:175px;">
-            <img src="Harcourts.png" alt="Harcourts Print & Digital Design" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="m-body"><h3>Print & Digital Design</h3><p>Banners, billboards, print and digital materials — tap to explore graphic design work</p><p class="m-client">Harcourts Cooper & Co</p></div>
-        </div>
-        <div class="m-card clickable" onclick="showTab('graphic',document.querySelectorAll('.f-btn')[2])">
-          <div class="m-thumb short" style="overflow:hidden;height:135px;">
-            <img src="Macorer.jpeg" alt="Macorer Brand Identity" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="m-body"><h3>Brand Identity & Stationery</h3><p>Logo design and full stationery system — tap to explore graphic design work</p><p class="m-client">Macorer</p></div>
-        </div>
-        <div class="m-card clickable" onclick="showTab('graphic',document.querySelectorAll('.f-btn')[2])">
-          <div class="m-thumb short" style="overflow:hidden;height:135px;">
-            <img src="Tacolicius.png" alt="Tacolicious Packaging" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="m-body"><h3>Packaging & Brand Identity</h3><p>Logo and packaging design for frozen food brand — tap to explore graphic design work</p><p class="m-client">Tacolicious</p></div>
-        </div>
-      </div>
     </div>
 
-    <!-- AUDIOVISUAL -->
-    <div class="tab-content" id="tab-audiovisual">
-      <div class="video-feature-card">
-        <div class="video-embed"><iframe src="https://www.youtube.com/embed/8AWqPpxKdP4?enablejsapi=1" allowfullscreen></iframe></div>
-        <div class="video-feature-info">
-          <div><h3>Showreel — Video & Motion Graphics</h3><p>Video production, editing, and motion graphics across events and brand campaigns</p></div>
-          <span class="vf-badge">Featured reel</span>
+    <!-- ABOUT SECTION -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    📸
+                </div>
+                <div class="about-text">
+                    <h2>About</h2>
+                    <p>I help brands find their voice and show up with clarity. My work blends creative execution with real-world marketing thinking — shaped by 10+ years across Mexico and New Zealand, from live events to digital campaigns.</p>
+                    <p>Whether it's brand identity, video production, or full campaigns, I focus on what actually works for your business — not just what looks good.</p>
+                    <a href="https://moisesmacias-hub.github.io/onboarding/" target="_blank" class="about-cta">Start a Project</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="masonry">
-        <div class="m-card">
-          <div style="position:relative;width:100%;height:230px;overflow:hidden;background:#0d1520;">
-            <iframe src="https://www.youtube.com/embed/cpoa9iAyX1g?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>Event Screen Graphics — Openers, Artist Intros & Sponsor Reels</h3><p>Animated screen content for live events designed for large-format stage displays</p><p class="m-client">OCESA</p></div>
-        </div>
-        <div class="m-card">
-          <div style="position:relative;width:100%;height:175px;overflow:hidden;background:#111827;">
-            <iframe src="https://www.youtube.com/embed/m1BRGXrst5I?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>Advertising Production Reel — TV & YouTube Spots</h3><p>Direction, shooting, talent management, motion graphics, and full post-production</p><p class="m-client">Telecable · Pegasica</p></div>
-        </div>
-        <div class="m-card">
-          <div style="position:relative;width:100%;height:230px;overflow:hidden;background:#0a1628;">
-            <iframe src="https://www.youtube.com/embed/HCI25Mxsy40?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>Motion Graphics Showreel</h3><p>2D animation, logo animation, title sequences, transitions, and infographics</p><p class="m-client">Various clients</p></div>
-        </div>
-        <div class="m-card">
-          <div style="position:relative;width:100%;height:175px;overflow:hidden;background:#111827;">
-            <iframe src="https://www.youtube.com/embed/Di85VF6fpgQ?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>Instagram Reels & Stories</h3><p>Creative concept, production, editing, and motion graphics for mobile-first social media</p><p class="m-client">Harcourts Cooper & Co</p></div>
-        </div>
-        <div class="m-card">
-          <div style="position:relative;width:100%;height:175px;overflow:hidden;background:#0d1520;">
-            <iframe src="https://www.youtube.com/embed/LHCdsGi4aCo?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>Brand Sponsorship Video — Basketball Event</h3><p>Fast-paced event video capturing sport energy and brand sponsorship presence</p><p class="m-client">Harcourts Cooper & Co</p></div>
-        </div>
-        <div class="m-card">
-          <div style="position:relative;width:100%;height:175px;overflow:hidden;background:#0a1628;">
-            <iframe src="https://www.youtube.com/embed/hlcakwyvgyg?enablejsapi=1" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;" allowfullscreen></iframe>
-          </div>
-          <div class="m-body"><h3>TOPIC App Launch — Explainer Video</h3><p>Motion graphics, original footage, and brand content combined for app launch</p><p class="m-client">TOPIC App</p></div>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- GRAPHIC DESIGN -->
-    <div class="tab-content" id="tab-graphic">
-      <div class="graphic-grid">
-        <div class="g-card" onclick="openLightbox('Harcourts.png','Print & Digital Design — Harcourts Cooper & Co','Brand promotion materials including banners, billboards, digital ads, and print assets for one of Auckland\'s leading real estate agencies.')">
-          <img src="Harcourts.png" alt="Harcourts Print & Digital Design">
-          <div class="g-card-body"><h3>Print & Digital Design</h3><p>Banners, billboards, pull-up displays, and digital advertising materials</p><p class="g-client">Harcourts Cooper & Co</p></div>
-        </div>
-        <div class="g-card" onclick="openLightbox('Macorer.jpeg','Brand Identity & Stationery — Macorer','Logo design and complete stationery system for a recycling company in Mexico — including business cards, letterheads, and brand guidelines.')">
-          <img src="Macorer.jpeg" alt="Macorer Brand Identity">
-          <div class="g-card-body"><h3>Brand Identity & Stationery</h3><p>Logo design and full stationery system for a recycling company</p><p class="g-client">Macorer · Mexico</p></div>
-        </div>
-        <div class="g-card" onclick="openLightbox('Tacolicius.png','Packaging Design & Brand Identity — Tacolicious','Logo and packaging design for a Mexican frozen food brand — including product label design for Birria Tacos retail packaging.')">
-          <img src="Tacolicius.png" alt="Tacolicious Packaging Design">
-          <div class="g-card-body"><h3>Packaging Design & Brand Identity</h3><p>Logo and retail packaging design for a Mexican frozen food brand</p><p class="g-client">Tacolicious</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- EXPERIENCE SECTION -->
+    <section class="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <p class="section-subtitle">10+ years across events, media, and marketing.</p>
 
-<!-- ══ EXPERIENCE ══ -->
-<section id="experience">
-  <div class="hero-mini">
-    <div class="geo-block"></div><div class="geo-circle"></div><div class="geo-line1"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Career history</p>
-      <h1>Experience</h1>
-    </div>
-  </div>
-  <div class="exp-wrapper">
-    <div class="exp-timeline">
-      <div class="exp-item">
-        <div class="exp-card">
-          <div class="exp-card-header">
-            <div><h3>Community Relationships Assistant — Marketing & Events</h3><p class="company">Harcourts Cooper & Co · Real Estate · Auckland, NZ</p></div>
-            <span class="exp-dates">Nov 2020 – Jan 2024</span>
-          </div>
-          <div class="exp-card-body">
-            <p>Managed marketing operations and content production for the Community Relationships office, supporting 17 offices across the North Shore — designing promotional assets, executing events spanning school, sports, cultural, social, arts, and charity initiatives, and delivering photo and video content that strengthened Harcourts' local brand presence. Contributed to the team's recognition with the REINZ Award.</p>
-            <ul>
-              <li><strong>Event logistics & operations:</strong> Managed end-to-end logistics for community and sponsorship events — material delivery, onsite setup and teardown, and coordination with agents and venues</li>
-              <li><strong>Print & digital design:</strong> Designed flyers, brochures, posters, and branded merchandise materials following brand guidelines (Canva, Photoshop, Illustrator)</li>
-              <li><strong>Photo & video content:</strong> Captured photography and filmed events for promotional use; edited social media content, Instagram Reels, and Stories using Premiere Pro and After Effects</li>
-              <li><strong>Agent support:</strong> Provided agents with branded merchandise and print materials for their own community events, maintaining brand consistency</li>
-              <li><strong>Brand visibility:</strong> Ensured consistent, professional brand presence across all community touchpoints — from signage to giveaways to digital coverage</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-card">
-          <div class="exp-card-header">
-            <div><h3>Communications Coordinator — Marketing & Campaigns</h3><p class="company">Pegasica · Promotions Agency · Mexico</p></div>
-            <span class="exp-dates">Jun 2017 – May 2018</span>
-          </div>
-          <div class="exp-card-body">
-            <p>Solely responsible for the communications and marketing function at a consumer promotions agency specialising in prize draws and sweepstakes. Reported to the General Manager and collaborated with external agencies and suppliers to execute two major campaigns per year — from concept to final delivery.</p>
-            <ul>
-              <li><strong>End-to-end campaign ownership:</strong> Independently managed the full creative and production process — brand image, advertising materials, TV and radio spots, POS signage, and event publicity</li>
-              <li><strong>Budget optimisation:</strong> Negotiated directly with suppliers to maximise media impact with minimal resources — no dedicated budget</li>
-              <li><strong>External coordination:</strong> Briefed and managed production houses, printers, and media outlets to meet campaign requirements and deadlines</li>
-              <li><strong>Live event execution:</strong> Participated in operations for live televised draws, following strict protocols involving government authorities and the public</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-card">
-          <div class="exp-card-header">
-            <div><h3>Venue Operations Support — Live Events</h3><p class="company">OCESA · Live Events Promoter · Mexico</p></div>
-            <span class="exp-dates">Oct 2011 – May 2017</span>
-          </div>
-          <div class="exp-card-body">
-            <p>Formed part of the direct support team for the Venue Operations Manager at one of Mexico's largest live entertainment promoters — working across concerts and events with capacities of 12,000+ attendees, approximately 20 events per year.</p>
-            <ul>
-              <li><strong>Marketing & promoter support:</strong> Assisted the promoter's marketing and publicity team with on-site needs — branding placement, signage coordination, press support, and in-venue activations</li>
-              <li><strong>Accreditation management:</strong> Managed the full accreditation system for media, sponsors, VIPs, venue staff, and promoter teams across all events</li>
-              <li><strong>Signage & venue branding:</strong> Coordinated design, production, and installation of signage and promotional materials, adapting rented venues to each event's requirements</li>
-              <li><strong>On-site operations:</strong> Supported the Venue Operations Manager during live events — troubleshooting and coordinating between venue staff and promoter teams</li>
-              <li><strong>Cross-functional coordination:</strong> Collaborated with security, production, and marketing teams to align venue logistics with promoter needs</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-card">
-          <div class="exp-card-header">
-            <div><h3>Commercial Producer</h3><p class="company">Telecable · Telecommunications · Mexico</p></div>
-            <span class="exp-dates">Nov 2010 – Sep 2011</span>
-          </div>
-          <div class="exp-card-body">
-            <p>Managed the full production cycle of commercial audiovisual advertising for a telecommunications company with its own in-house production unit.</p>
-            <ul>
-              <li>Led pre-production, production, and post-production of TV advertising spots</li>
-              <li>Wrote scripts and coordinated the production team throughout each project</li>
-              <li>Handled audio and video editing and delivery of broadcast-ready material</li>
-              <li>Managed client relationships and provided ongoing production support</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-card">
-          <div class="exp-card-header">
-            <div><h3>Broadcaster & Radio Producer</h3><p class="company">Mexican Institute of Youth · Government · Mexico</p></div>
-            <span class="exp-dates">Nov 2010 – Nov 2011</span>
-          </div>
-          <div class="exp-card-body">
-            <ul>
-              <li>Hosted and produced a weekly cultural radio programme on SJRT promoting government programmes and events for youth development</li>
-              <li>Wrote content and coordinated production for each broadcast</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="exp-item">
-        <div class="exp-card">
-          <div class="exp-card-header">
-            <div><h3>Freelance — Audiovisual & Brand Activation</h3><p class="company">Various clients · Mexico</p></div>
-            <span class="exp-dates">Freelance</span>
-          </div>
-          <div class="exp-card-body">
-            <ul>
-              <li><strong>Vallarta Adventure:</strong> Prepared and operated camera equipment for a range of recreational activities; edited and delivered finished audiovisual material to clients the same day, within tight turnaround windows</li>
-              <li><strong>Gatorade:</strong> Formed part of the brand activation operations team — supporting logistics, delivery and retrieval of promotional materials, and managing setup and teardown of brand presence at sports events</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Harcourts Cooper & Co</h3>
+                    <div class="role">Marketing & Events · Auckland, NZ</div>
+                    <p>17 offices, community-driven content, social media strategy and event production.</p>
+                </div>
 
-<!-- ══ CONTACT ══ -->
-<section id="contact">
-  <div class="hero-mini">
-    <div class="geo-block"></div><div class="geo-circle"></div><div class="geo-line1"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Let's work together</p>
-      <h1>Get in <span>Touch</span></h1>
-    </div>
-  </div>
-  <div class="contact-wrapper">
-    <div class="contact-grid">
-      <div class="c-card">
-        <h3>Contact details</h3>
-        <a href="mailto:moisesmaciasm@gmail.com">moisesmaciasm@gmail.com</a>
-        <a href="tel:+64276474067">027 647 4067</a>
-        <a href="https://www.linkedin.com/in/moisesmacias-hub" target="_blank">LinkedIn — moisescomspecialist</a>
-        <a href="https://www.instagram.com/moisesmedia_" target="_blank">Instagram — @moisesmacias.hub</a>
-        <a href="https://www.youtube.com/watch?v=8AWqPpxKdP4" target="_blank">Video Reel — YouTube</a>
-      </div>
-      <div class="c-card">
-        <h3>Availability</h3>
-        <p>Currently based in the South Island, New Zealand — having explored the region and experienced Marlborough's unique wine-making culture.</p>
-        <p style="margin-top:0.6rem;">New Zealand Permanent Resident — full working rights, no restrictions.</p>
-        <p style="margin-top:0.6rem;">Open to opportunities nationwide, with flexibility to relocate as needed.</p>
-        <span class="avail">Open to Relocate · NZ PR</span>
-      </div>
-    </div>
-  </div>
-</section>
+                <div class="timeline-item">
+                    <h3>Pegasica</h3>
+                    <div class="role">Communications Coordinator · Mexico</div>
+                    <p>360° campaigns across TV, radio, digital, and point-of-sale for national promotions.</p>
+                </div>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-  <div class="lightbox-inner">
-    <img id="lightbox-img" src="" alt="">
-    <div class="lightbox-info">
-      <div>
-        <h3 id="lightbox-title"></h3>
-        <p id="lightbox-desc"></p>
-      </div>
-      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-    </div>
-  </div>
-</div>
+                <div class="timeline-item">
+                    <h3>OCESA</h3>
+                    <div class="role">Venue Operations Support · Mexico</div>
+                    <p>12,000+ attendee concerts, large-format screen graphics, ~20 events per year.</p>
+                </div>
 
-<script>
-  var ytPlayers = [];
+                <div class="timeline-item">
+                    <h3>Freelance</h3>
+                    <div class="role">Creative & Brand Activation</div>
+                    <p>Vallarta Adventure, Gatorade, and local brands — video, branding, and campaigns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  var tag = document.createElement('script');
-  tag.src = 'https://www.youtube.com/iframe_api';
-  var firstScript = document.getElementsByTagName('script')[0];
-  firstScript.parentNode.insertBefore(tag, firstScript);
+    <!-- SKILLS SECTION -->
+    <section class="skills">
+        <div class="container">
+            <h2 class="section-title">What I Do</h2>
+            <p class="section-subtitle">Three core areas — all connected by strategic thinking.</p>
 
-  function onYouTubeIframeAPIReady(){
-    document.querySelectorAll('iframe[src*="youtube"]').forEach(function(f, i){
-      f.id = f.id || ('ytframe_' + i);
-      var p = new YT.Player(f.id, {
-        events:{
-          'onStateChange': function(e){
-            if(e.data === YT.PlayerState.PLAYING){
-              ytPlayers.forEach(function(other){
-                if(other !== e.target){
-                  try{ other.pauseVideo(); }catch(err){}
-                }
-              });
-            }
-          }
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Brand & Visual Identity</h3>
+                    <p>Logo design, packaging, brand systems, and print materials for businesses that need to look credible and launch-ready.</p>
+                    <p style="margin-top: 1rem; font-weight: 600; color: var(--color-primary);">Harcourts (17 offices) · Macorer · Tacolicious</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Motion & Audiovisual</h3>
+                    <p>Video production, motion graphics, TV spots, social reels, and large-format event content that captures attention.</p>
+                    <p style="margin-top: 1rem; font-weight: 600; color: var(--color-secondary);">OCESA Events · Telecable Spots · Pegasica Campaigns</p>
+                </div>
+
+                <div class="skill-card">
+                    <h3>Strategy & AI Workflow</h3>
+                    <p>Marketing strategy, Google Ads, YouTube campaigns, and AI-powered content tools to work smarter and faster.</p>
+                    <p style="margin-top: 1rem; font-weight: 600; color: var(--color-accent);">Google Ads · YouTube · AI Content Tools</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Work Together</h2>
+            <p class="section-subtitle">Ready to create something that works for your business?</p>
+
+            <div class="contact-links">
+                <a href="/cdn-cgi/l/email-protection#55383a3c2630263834363c342638153238343c397b363a38" class="contact-link"><span class="__cf_email__" data-cfemail="0c6163657f697f616d6f656d7f614c6b616d6560226f6361">[email&#160;protected]</span></a>
+                <a href="https://instagram.com/moisesmacias.hub" target="_blank" class="contact-link">@moisesmacias.hub</a>
+                <a href="https://linkedin.com/in/moisesmacias-hub" target="_blank" class="contact-link">LinkedIn</a>
+            </div>
+
+            <a href="https://moisesmacias-hub.github.io/onboarding/" target="_blank" class="contact-cta">Start a Project</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Moises Macias · Creative Studio · New Zealand</p>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Video Modal Functionality
+        const videoModal = document.getElementById('videoModal');
+        const videoFrame = document.getElementById('videoFrame');
+        const closeModal = document.getElementById('closeModal');
+        const videoItems = document.querySelectorAll('.portfolio-item.video');
+
+        // Open video modal
+        videoItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const videoId = this.getAttribute('data-video-id');
+                videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                videoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close video modal
+        function closeVideoModal() {
+            videoModal.classList.remove('active');
+            videoFrame.src = '';
+            document.body.style.overflow = 'auto';
         }
-      });
-      ytPlayers.push(p);
-    });
-  }
 
-  function stopAllVideos(){
-    ytPlayers.forEach(function(p){
-      try{ p.pauseVideo(); }catch(err){}
-    });
-  }
+        closeModal.addEventListener('click', closeVideoModal);
 
-  function showSection(id,el){
-    stopAllVideos();
-    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-    document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    if(el)el.classList.add('active');
-    window.scrollTo(0,0);
-  }
+        // Close on background click
+        videoModal.addEventListener('click', function(e) {
+            if (e.target === videoModal) {
+                closeVideoModal();
+            }
+        });
 
-  function showTab(id,el){
-    stopAllVideos();
-    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.f-btn').forEach(b=>b.classList.remove('active'));
-    document.getElementById('tab-'+id).classList.add('active');
-    if(el)el.classList.add('active');
-  }
+        // Close on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                closeVideoModal();
+            }
+        });
 
-  function openLightbox(src,title,desc){
-    document.getElementById('lightbox-img').src=src;
-    document.getElementById('lightbox-title').textContent=title;
-    document.getElementById('lightbox-desc').textContent=desc;
-    document.getElementById('lightbox').classList.add('active');
-  }
+        // Pause video when tab is not visible
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && videoModal.classList.contains('active')) {
+                closeVideoModal();
+            }
+        });
 
-  function closeLightbox(e){
-    if(!e||e.target===document.getElementById('lightbox')||e.target.classList.contains('lightbox-close')){
-      document.getElementById('lightbox').classList.remove('active');
-      document.getElementById('lightbox-img').src='';
-    }
-  }
+        // Smooth scroll for CTA button
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape') closeLightbox();
-  });
-</script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+
+        // Hero section should be visible immediately
+        document.querySelector('.hero').style.opacity = '1';
+        document.querySelector('.hero').style.transform = 'translateY(0)';
+    </script>
+
 </body>
 </html>
